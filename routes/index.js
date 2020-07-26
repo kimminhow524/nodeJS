@@ -1,13 +1,13 @@
+import { usermodel } from "../models/users";
+
 var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-    res.render("index", { title: "Express" });
-});
-router.get("/list", (req, res, next) => {
-    const json = { name: "minho", age: 19 };
-    res.render("asd", { title: json });
+router.get("/", async (req, res, next) => {
+    const allUser = await usermodel.find().exec();
+    //  console.log(allUser);
+    res.render("core/index", { title: "Expres" });
 });
 
 module.exports = router;

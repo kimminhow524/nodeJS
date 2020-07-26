@@ -1,13 +1,25 @@
+import bodypars from "body-parser";
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var session = require("express-session");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+import "./mongodb";
+
+//session
+app.use(
+    session({
+        secret: "asdf3234sdf@#%^@sdfa234ws3s3",
+        resave: false,
+        saveUninitialized: true,
+    })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -18,9 +30,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodypars.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+
+//ajax
+app.post("/api/post", function (req, res) {
+    var data = req.session.username;
+
+    console.log("POST Parameter = " + data);
+
+    var result = data;
+
+    console.log(result);
+
+    res.send({ result: result });
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

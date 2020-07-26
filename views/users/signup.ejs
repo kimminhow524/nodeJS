@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+    <body>
+        <% include ../partial/header %> <br />
+        <div id="main">
+            <div class="wrapper">
+                <div class="inner">
+
+                    <form method="POST">
+                        <div class="row gtr-uniform">
+                            <div class="col-6 col-12-xsmall">
+                                <input type="text" name="username" placeholder="이름" />
+                            </div>
+                            <div class="col-6 col-12-xsmall">
+                            <input type="password" name="password" placeholder="비번" />
+                            </div>
+                            <ul class="actions special">
+                                <li><button>Submit</button></li>
+                            </ul>
+
+                        </div>
+                    </form>
+                    <div  style=" text-align: center;">
+                    <a href="/users/login">로그인 바로가기</a>
+               
+                        </div>
+                    <div  style=" text-align: center;">
+                        <a href="/users/logout">로그아웃 바로가기</a>               
+                        </div>
+                </div>
+            </div>  
+        
+        <% include ../partial/footer %>
+    </body>
+</html>
