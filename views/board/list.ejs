@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+
+    <body>
+        <% include ../partial/header %>
+        <div id="main">
+            <div class="wrapper">
+                <div class="inner">
+                    <h4>Board</h4>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Writer</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% list.docs.forEach(li=> { %>
+                                <tr>
+                                    <td><a href="/board/detail?id=<%= li._id %>"><%= li.title %></a></td>
+                                    <td><%= li.writer %></td>
+                                    <td><%= li.updateDate %></td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                        <ul class="actions stacked">
+                            <li><a href="/board/new" class="button fit">글쓰기</a></li>
+                        </ul>
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <% if(list.page==1){%>
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <% }else{ %>
+                                    <a class="page-link" href="/board/list?page=<%= list.prevPage %> " aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <% } %>
+                                </li>
+
+                                <li class="page-item"><a class="page-link" href="#"><%= list.page %>/<%= list.totalPages %> </a></li>
+
+                                <% if(list.page==list.totalPages){%>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <% }else{ %>
+                                </li>
+
+                                <li class="page-item">
+                                    <a class="page-link" href="/board/list?page=<%= list.nextPage %> " aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+
+                                    <% } %>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include ../partial/footer %>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+    <body>
+        <% include ../partial/header %>
+        <div id="main">
+            <div class="wrapper">
+                <div class="inner">
+                    <h3>READ</h3>
+                    <div class="content">
+                        <div class="form">
+                    
+                                <div class="fields">
+                                    <div class="field">
+                                        <input name="title" id="title" name="title" type="text" readonly value="<%= data.title %>" />
+                                    </div>
+
+                                    <div class="field">
+                                        <textarea id="message" name="contents" rows="6" readonly><%= data.contents%></textarea>
+                                    </div>
+                                </div>
+                                <% if(session.username==data.writer){ %> 
+                                 <ul class="actions special">
+                                    <li>	<a href="/board/updateData?id=<%= data._id %>" class="button">수정</a></li>
+                                    <li>	<a href="/board/delete?id=<%= data._id %>" class="button">삭제</a></li>
+                                </ul> 
+                                </ul> 
+                                <% } %> 
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% include ../partial/footer %>
+    </body>
+</html>

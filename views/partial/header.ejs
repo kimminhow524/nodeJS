@@ -3,12 +3,17 @@
 
     <nav id="nav">
         <ul>
-            <li id="LoginUsername"></li>
-            <li class="current"><a href="/">Home</a></li>
+            <% if(session.username) { %>
+            <li><%= session.username %>님 환영합니다.</li>
+            <% } %>
             <li>
-                <a href="/users/login" class="login">login</a>
-                <a href="/users/signup" class="signup">Sign up</a>
-                <a href="/users/logout" class="logout" style="display: none;">Logout</a>
+                <% if(!session.username){ %>
+                <a href="/users/login" class="login" name="login">login</a>
+                <a href="/users/signup" class="signup" name="signup">Signup</a>
+                <% }else{ %>
+                <a href="/users/logout" class="logout" name="logout" style="display: none;">Logout</a>
+                <% } %>
+                <a href="/board/list" class="board list" name="boardlist">Board</a>
             </li>
         </ul>
     </nav>

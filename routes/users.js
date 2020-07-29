@@ -6,11 +6,11 @@ var router = express.Router();
 var user = null;
 
 router.get("/", async (req, res, next) => {
-    req.session.username = req.session;
+    res.render("/", { title: "Express", session: req.session });
 });
 
 router.get(`/signup`, (req, res, next) => {
-    res.render(`users/signup`);
+    res.render(`users/signup`, { session: req.session });
 });
 
 router.post(`/signup`, async (req, res, next) => {
@@ -35,7 +35,7 @@ router.post(`/signup`, async (req, res, next) => {
 });
 
 router.get("/login", (req, res, next) => {
-    res.render("users/login");
+    res.render("users/login", { session: req.session });
 });
 
 router.post("/login", async (req, res, next) => {

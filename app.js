@@ -8,6 +8,7 @@ var session = require("express-session");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var boardRouter = require("./routes/board");
 
 var app = express();
 import "./mongodb";
@@ -34,6 +35,7 @@ app.use(bodypars.urlencoded({ extended: false }));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/board", boardRouter);
 
 //ajax
 app.post("/api/post", function (req, res) {
