@@ -11,24 +11,71 @@
                     <h3>READ</h3>
                     <div class="content">
                         <div class="form">
-                    
-                                <div class="fields">
-                                    <div class="field">
-                                        <input name="title" id="title" name="title" type="text" readonly value="<%= data.title %>" />
-                                    </div>
-
-                                    <div class="field">
-                                        <textarea id="message" name="contents" rows="6" readonly><%= data.contents%></textarea>
-                                    </div>
+                            <div class="fields">
+                                <div class="field">
+                                    <input name="title" id="title" name="title" type="text" readonly value="<%= data.title %>" />
                                 </div>
-                                <% if(session.username==data.writer){ %> 
-                                 <ul class="actions special">
-                                    <li>	<a href="/board/updateData?id=<%= data._id %>" class="button">수정</a></li>
-                                    <li>	<a href="/board/delete?id=<%= data._id %>" class="button">삭제</a></li>
-                                </ul> 
-                                </ul> 
-                                <% } %> 
-                      
+
+                                <div class="field" style="margin-top: 5%;">
+                                    <textarea id="message" name="contents" rows="6" readonly><%= data.contents%></textarea>
+                                </div>
+                            </div>
+
+                            <% if(session.username==data.writer){ %>
+                            <ul class="actions special">
+                                <li><a href="/board/updateData?id=<%= data._id %>" class="button">수정</a></li>
+                                <li><a href="/board/delete?id=<%= data._id %>" class="button">삭제</a></li>
+                            </ul>
+                            <% } %>
+
+                            <!-- 댓글 -->
+                            <div style="margin-top: 5%;">
+                                <ul class="icons">
+                                    <li style="display: block;">
+                                        <span class="icon solid fa-envelope"></span>
+                                        <strong>댓글</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                            <% if(session.username) { %>
+                            <div class="form">
+                                <form method="post">
+                                    <div class="fields">
+                                        <div class="field">
+                                            <input name="replyContents" id="replyContents" type="text" placeholder="댓글을 입력하세요" />
+                                        </div>
+                                    </div>
+                                    <ul class="actions special">
+                                        <li><button class="button">완료</button></li>
+                                    </ul>
+                                </form>
+                            </div>
+                            <% } %>
+                            <div class="table-wrapper">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>회원명</th>
+                                            <th>내용</th>
+                                            <th>시간</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% reply.forEach(rep=> { %>
+                                        <tr>
+                                            <td><%= rep.writer %></td>
+                                            <td><%= rep.contents %></td>
+                                            <td><%= rep.updateDate %></td>
+                                            <% if(session.username==rep.writer){ %>
+                                            <td>
+                                                <li><a href="/board/delRepl?id=<%= rep._id %>">삭제</a></li>
+                                            </td>
+                                            <% } %>
+                                        </tr>
+                                        <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

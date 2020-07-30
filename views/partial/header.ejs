@@ -3,15 +3,12 @@
 
     <nav id="nav">
         <ul>
-            <% if(session.username) { %>
-            <li><%= session.username %>님 환영합니다.</li>
-            <% } %>
             <li>
-                <% if(!session.username){ %>
+                <% if(session.username) { %><a> <%= session.username %>님 환영합니다. </a><% } %> <% if(!session.username){ %>
                 <a href="/users/login" class="login" name="login">login</a>
                 <a href="/users/signup" class="signup" name="signup">Signup</a>
                 <% }else{ %>
-                <a href="/users/logout" class="logout" name="logout" style="display: none;">Logout</a>
+                <a href="/users/logout" class="logout" name="logout">Logout</a>
                 <% } %>
                 <a href="/board/list" class="board list" name="boardlist">Board</a>
             </li>

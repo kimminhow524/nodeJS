@@ -1,6 +1,4 @@
-import { boardmodel } from "../models/board";
-import { render } from "ejs";
-import session from "express-session";
+import { boardmodel, reply, replymodel } from "../models/board";
 var express = require("express");
 var router = express.Router();
 var moment = require("moment");
@@ -45,7 +43,7 @@ router.get("/new", async (req, res, next) => {
 
 router.post("/new", async (req, res, next) => {
     const { title, contents } = req.body;
-    var date = moment().format("YYYY-MM-DD HH:mm:ss");
+    var date = moment().format("YYYY-MM-DD HH:mm");
     boardmodel
         .create({
             title: title,
@@ -65,18 +63,51 @@ router.post("/new", async (req, res, next) => {
 //글 읽기
 router.get("/detail", async (req, res, next) => {
     const { id } = req.query;
-    boardmodel
+
+    const detail = await boardmodel
         .findOne({ _id: id })
-        .then((data) => {
-            res.render("board/detail", { data: data, session: req.session });
-        })
+        .exec()
+        .catch((err) => {
+            console.log(err);
+            res.redirect("/board/list");
+            return;
+        });
+    console.log(detail);
+
+    const replyread = await replymodel
+        .find({ boardid: id })
+        .exec()
         .catch((err) => {
             console.log(err);
             res.redirect("/board/list");
         });
 
-    res.render("board/detail", { data: data, session: req.session });
+    res.render("board/detail", { data: detail, reply: replyread, session: req.session });
 });
+
+//댓글쓰기
+router.post("/detail", async (req, res, next) => {
+    const { id } = req.query;
+    const { replyContents } = req.body;
+    console.log(" 댓글 내용------------" + replyContents);
+
+    var date = moment().format("YYYY-MM-DD HH:mm");
+    const replyWrite = await replymodel
+        .create({
+            boardid: id,
+            writer: req.session.username,
+            contents: replyContents,
+            updateDate: date,
+        })
+        .catch((err) => {
+            console.log(err);
+            res.redirect("/board/list");
+            return;
+        });
+
+    res.redirect(`/board/detail?id=${id}`);
+});
+
 //업데이트
 router.get("/updateData", async (req, res, next) => {
     const { id } = req.query;
@@ -123,7 +154,27 @@ router.get("/delete", async (req, res, next) => {
             console.log("success");
             res.redirect("/board/list");
         })
-        .err((err) => {
+        .catch((err) => {
+            console.log(err);
+            res.send(`
+        <script>alert("알수없는 에러가 나버렸지 뭐얌" ) 
+        history.back()
+        </script>
+        `);
+        });
+});
+
+router.get("/delRepl", (req, res, next) => {
+    const { id } = req.query;
+    console.log("댓글 정보-------------" + id);
+
+    replymodel
+        .deleteOne({ _id: id })
+        .then((data) => {
+            console.log(data);
+            res.redirect("/board/list");
+        })
+        .catch((err) => {
             console.log(err);
             res.send(`
         <script>alert("알수없는 에러가 나버렸지 뭐얌" ) 

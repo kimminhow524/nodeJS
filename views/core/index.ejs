@@ -8,17 +8,19 @@
         <div id="main">
             <div class="wrapper">
                 <div class="inner">
+                    <header class="major">
+                        <h1><%= title %></h1>
+                        <p>My test server</p>
+                    </header>
+                    <% if(session.username=="admin"){ %>
+                    <div style="text-align: center;">
+                        <h1><a href="/admin">admin page </a></h1>
+                    </div>
 
-                        <header class="major">
-                            <h1><%= title %> </h1>
-                            <p>My test server</p>
-                        </header>
-                        <div class="row gtr-200">
-                            <div class="col-6 col-12-medium">
-                            </div>
-                            </div>
+                    <% } %>
                 </div>
-            </div>   
+            </div>
+        </div>
         <% include ../partial/footer %>
     </body>
 </html>
