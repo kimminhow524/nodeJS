@@ -7,9 +7,13 @@ var logger = require("morgan");
 var session = require("express-session");
 var admin = require("sriracha-admin");
 
+// import socketIo from "socket.io";
+//import socketEvent from "./socket";
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var boardRouter = require("./routes/board");
+//var chattingRouter = require("./routes/chatting");
 
 var app = express();
 import "./mongodb";
@@ -38,6 +42,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/board", boardRouter);
 app.use("/admin", admin());
+//app.use("/chatting", chattingRouter);
 //ajax
 app.post("/api/post", function (req, res) {
     var data = req.session.username;
@@ -67,6 +72,8 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
-app.listen(8090);
+const server = app.listen(8090);
 console.log(`http://localhost:8090`);
+//const io = socketIo(server);
+//socketEvent(io);
 module.exports = app;

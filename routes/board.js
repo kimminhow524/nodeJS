@@ -2,6 +2,17 @@ import { boardmodel, reply, replymodel } from "../models/board";
 var express = require("express");
 var router = express.Router();
 var moment = require("moment");
+const multer = require("multer");
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, "public/images/boardph/");
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.originalname);
+        },
+    }),
+});
 
 router.get("/", async (req, res, next) => {
     res.redirect("/");
@@ -41,15 +52,18 @@ router.get("/new", async (req, res, next) => {
     res.render("board/new", { session: req.session });
 });
 
-router.post("/new", async (req, res, next) => {
+//글쓰기
+router.post("/new", upload.single(`img`), async (req, res, next) => {
     const { title, contents } = req.body;
+    console.log(req.file);
     var date = moment().format("YYYY-MM-DD HH:mm");
-    boardmodel
+    await boardmodel
         .create({
             title: title,
             contents: contents,
             writer: req.session.username,
             updateDate: date,
+            file: req.file.originalname,
         })
         .then((data) => {
             console.log(data);
@@ -114,8 +128,10 @@ router.get("/updateData", async (req, res, next) => {
     res.render("board/updatedata", { id: id, session: req.session });
 });
 
-router.post("/updateData", async (req, res, next) => {
+router.post("/updateData", upload.single(`img`), async (req, res, next) => {
     const { id } = req.query;
+    console.log(req.file);
+
     const { title, contents } = req.body;
     console.log("id check:" + id);
     var date = moment().format("YYYY-MM-DD HH:mm");
@@ -177,7 +193,7 @@ router.get("/delRepl", (req, res, next) => {
         .catch((err) => {
             console.log(err);
             res.send(`
-        <script>alert("알수없는 에러가 나버렸지 뭐얌" ) 
+        <script>alert("알수없는 에러" ) 
         history.back()
         </script>
         `);

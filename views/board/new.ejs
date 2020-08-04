@@ -11,15 +11,22 @@
                     <h3>WRITING</h3>
                     <div class="content">
                         <div class="form">
-                            <form method="post">
+                            <form method="POST" enctype="multipart/form-data">
                                 <div class="fields">
                                     <div class="field">
                                         <input name="title" id="title" name="title" placeholder="title" type="text" />
                                     </div>
 
+                                    <span class="image fit"><img src="#" id="preview" alt="" /></span>
+
                                     <div class="field">
                                         <textarea id="message" name="contents" rows="6" placeholder="내용을 입력하세요"></textarea>
                                     </div>
+                                </div>
+                                <div class="field">
+                                    <label for="inputfile">사진 첨부 </label>
+                                    <br />
+                                    <input type="file" class="uploadfile" name="img" />
                                 </div>
                                 <ul class="actions special">
                                     <li><button class="button">글 등록</button></li>

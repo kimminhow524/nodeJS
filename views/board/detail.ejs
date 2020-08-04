@@ -15,7 +15,9 @@
                                 <div class="field">
                                     <input name="title" id="title" name="title" type="text" readonly value="<%= data.title %>" />
                                 </div>
-
+                                <% if(data.file){%>
+                                <span class="image fit" style="margin-top: 5%;"><img src="\images\boardph\<%=data.file %>" alt="" /></span>
+                                <%}%>
                                 <div class="field" style="margin-top: 5%;">
                                     <textarea id="message" name="contents" rows="6" readonly><%= data.contents%></textarea>
                                 </div>
@@ -55,9 +57,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>회원명</th>
-                                            <th>내용</th>
-                                            <th>시간</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

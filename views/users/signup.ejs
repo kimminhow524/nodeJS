@@ -11,25 +11,28 @@
                     <h3>SIGN UP</h3>
                     <form method="POST">
                         <div class="row gtr-uniform">
-                            <div class="col-6 col-12-xsmall">
-                                <input type="text" name="username" placeholder="이름" />
+                            <div class="col-6 col-12">
+                                <input type="text" name="username" placeholder="Nickname" />
                             </div>
-                            <div class="col-6 col-12-xsmall">
-                            <input type="password" name="password" placeholder="비번" />
+                            <div class="col-6 col-12">
+                                <input type="password" name="password" placeholder="password" />
+                            </div>
+                            <div class="col-6 col-12">
+                                <input type="email" name="email" placeholder="E-mail" />
                             </div>
                             <ul class="actions special">
                                 <li><button>Submit</button></li>
                             </ul>
-
                         </div>
                     </form>
-                   
-                        <ul class="actions stacked">
-                            <li><a href="/users/login" class="button fit">로그인 바로가기</a></li>
-                        </ul>
+
+                    <ul class="actions stacked">
+                        <li><a href="/users/login" class="button fit">로그인 바로가기</a></li>
+                    </ul>
                 </div>
-            </div>  
-        
+            </div>
+        </div>
+
         <% include ../partial/footer %>
     </body>
 </html>

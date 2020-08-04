@@ -15,6 +15,10 @@ const boardSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    file: {
+        type: String,
+        required: false,
+    },
     updateDate: {
         type: String,
         default: new Date(),

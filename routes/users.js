@@ -14,11 +14,12 @@ router.get(`/signup`, (req, res, next) => {
 });
 
 router.post(`/signup`, async (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
     usermodel
         .create({
             username,
             password,
+            email,
         })
         .then((user) => {
             console.log(user);
@@ -39,14 +40,14 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", async (req, res, next) => {
-    const { username, password } = req.body;
-    console.log(username);
+    const { email, password } = req.body;
+    console.log(email);
     console.log(password);
     usermodel
         .findOne({
             $and: [
                 {
-                    username,
+                    email,
                 },
                 {
                     password,

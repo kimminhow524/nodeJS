@@ -1,5 +1,4 @@
 import { usermodel } from "../models/users";
-import session from "express-session";
 
 var express = require("express");
 var router = express.Router();
