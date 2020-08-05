@@ -57,13 +57,19 @@ router.post("/new", upload.single(`img`), async (req, res, next) => {
     const { title, contents } = req.body;
     console.log(req.file);
     var date = moment().format("YYYY-MM-DD HH:mm");
+    if (req.file != undefined) {
+        var photo = req.file.originalname;
+    } else {
+        var photo = "null";
+    }
+
     await boardmodel
         .create({
             title: title,
             contents: contents,
             writer: req.session.username,
             updateDate: date,
-            file: req.file.originalname,
+            file: photo,
         })
         .then((data) => {
             console.log(data);
@@ -131,6 +137,11 @@ router.get("/updateData", async (req, res, next) => {
 router.post("/updateData", upload.single(`img`), async (req, res, next) => {
     const { id } = req.query;
     console.log(req.file);
+    if (req.file.originalname) {
+        var photo = req.file.originalname;
+    } else {
+        var photo = "null";
+    }
 
     const { title, contents } = req.body;
     console.log("id check:" + id);

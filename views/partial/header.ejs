@@ -8,10 +8,11 @@
                 <a href="/users/login" class="login" name="login">login</a>
                 <a href="/users/signup" class="signup" name="signup">Signup</a>
                 <% }else{ %>
+                <a href="/users/info?id=<%= session.oriId %>" class="myinfo" name="myinfo">MyInfo</a>
                 <a href="/users/logout" class="logout" name="logout">Logout</a>
+                <a href="/chatting/chat" class="chat" name="chat">Chatting</a>
                 <% } %>
                 <a href="/board/list" class="board list" name="boardlist">Board</a>
-                <a href="/chatting/chat" class="chat" name="chat">Chatting</a>
             </li>
         </ul>
     </nav>

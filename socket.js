@@ -1,3 +1,11 @@
+module.exports = (io) => {
+    io.on("connection", (socket) => {
+        socket.on("chat", (data) => {
+            io.emit("chat", data);
+        });
+    });
+};
+
 // import { chatting } from "./models/chatting";
 
 // module.exports = (io) => {
@@ -26,6 +34,7 @@
 //                 .catch((err) => {
 //                     console.log(err);
 //                 });
+
 //         });
 //     });
 // };

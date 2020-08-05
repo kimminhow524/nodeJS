@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+    <body>
+        <% include ../partial/header %>
+
+        <div id="main">
+            <div class="wrapper">
+                <div class="inner">
+                    <h3>INFO</h3>
+                    <div class="content">
+                        <div class="row gtr-50 gtr-uniform">
+                            <div class="col-4"><span class="image fit"><img src="/images/usersph/imagenon" id="preview"/></span></div>
+
+                        <div class="field">
+                            <input id="userName" name="userName" type="text" readonly value="<%= data.username %> " />
+                        </div>
+                        <div class="field">
+                            <input id="email" name="email" type="text" readonly value="<%= data.email %> " />
+                        </div>
+                    </div>
+
+                   
+                    <% if(session.username==data.writer){ %>
+                    <ul class="actions special">
+                        <li><a href="/board/updateData?id=<%= data._id %>" class="button">수정</a></li>
+                        <li><a href="/board/delete?id=<%= data._id %>" class="button">삭제</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+    <% include ../partial/footer %>
+</html>
