@@ -170,7 +170,7 @@ router.post("/updateData", upload.single(`img`), async (req, res, next) => {
             `);
         });
 });
-
+//글 삭제
 router.get("/delete", async (req, res, next) => {
     const { id } = req.query;
     console.log("id check:" + id);
@@ -190,7 +190,7 @@ router.get("/delete", async (req, res, next) => {
         `);
         });
 });
-
+//댓글 삭제
 router.get("/delRepl", (req, res, next) => {
     const { id } = req.query;
     console.log("댓글 정보-------------" + id);

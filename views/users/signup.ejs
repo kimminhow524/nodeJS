@@ -8,6 +8,11 @@
         <div id="main">
             <div class="wrapper">
                 <div class="inner">
+                    <% if(show == "true"){%>
+                    <script>
+                        var message = "<%=message%>";
+                    </script>
+                    <% include ../partial/temp %> <% } %>
                     <h3>SIGN UP</h3>
                     <form method="POST">
                         <div class="row gtr-uniform">

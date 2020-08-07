@@ -11,24 +11,28 @@
                 <div class="inner">
                     <h3>INFO</h3>
                     <div class="content">
-                        <div class="row gtr-50 gtr-uniform">
-                            <div class="col-4"><span class="image fit"><img src="/images/usersph/imagenon" id="preview"/></span></div>
-
-                        <div class="field">
+                        <div class="fields">
+                            <% if(data.photo==undefined||data.photo=='null'){%>
+                            <div class="col-4"><span class="image fit"><img src="\images\usersph\imagenon.png" id="preview"/></span></div>
+                                <% }else{ %> 
+                                <div class="col-4"><span class="image fit"><img src="\images\usersph\<%= data.photo %> " id="preview"/></span></div>
+                                <% } %> 
+                            <div class="field">
+                            <h3>USERNAME<h3>
                             <input id="userName" name="userName" type="text" readonly value="<%= data.username %> " />
-                        </div>
-                        <div class="field">
+                           </div>
+                            <div class="field">
+                            <h3>E-MAiL<h3>
                             <input id="email" name="email" type="text" readonly value="<%= data.email %> " />
                         </div>
-                    </div>
+                        <ul class="actions special" style="margin-top: 5%;">
+                            <li><a href="/users/updateInfo?id=<%= data._id %>" class="button">수정</a></li>
+                            <li><a href="/users/finally?id=<%= data._id %>" class="button">회원탈퇴</a></li>
+                        </ul>
 
-                   
-                    <% if(session.username==data.writer){ %>
-                    <ul class="actions special">
-                        <li><a href="/board/updateData?id=<%= data._id %>" class="button">수정</a></li>
-                        <li><a href="/board/delete?id=<%= data._id %>" class="button">삭제</a></li>
-                        <% } %>
-                    </ul>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
         </div>

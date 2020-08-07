@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var session = require("express-session");
 var admin = require("sriracha-admin");
+import flash from "connect-flash";
 
 import socketIo from "socket.io";
 import socketEvent from "./socket";
@@ -37,6 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodypars.urlencoded({ extended: false }));
+app.use(flash());
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);

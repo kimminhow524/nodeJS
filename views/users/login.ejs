@@ -5,6 +5,9 @@
     </head>
     <body>
         <% include ../partial/header %>
+        <% if(show == "true"){%>
+            <script> var message="<%=message%>" </script>
+            <% include ../partial/temp %> <% } %>
         <div id="main">
             <div class="wrapper">
                 <div class="inner">

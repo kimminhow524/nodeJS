@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+    <body>
+        <h3>탈퇴 하는중....</h3>
+        <img src="\images\usersph\테스트용 화면.jpg" />
+        <form method="POST" class="js_form">
+            <input type="hidden" name="id" value="<%= id %>" />
+        </form>
+
+        <script>
+            const form = document.querySelector(".js_form");
+            init = () => {
+                setTimeout(() => {
+                    alert("지금까지 함께 해주셔서 감사합니다.");
+                    form.submit();
+                }, 100);
+            };
+            init();
+        </script>
+    </body>
+</html>

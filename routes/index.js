@@ -7,7 +7,9 @@ var router = express.Router();
 router.get("/", async (req, res, next) => {
     const allUser = await usermodel.find().exec();
     //  console.log(allUser);
-    res.render("core/index", { title: "Express", session: req.session });
+    const show = req.flash("show");
+    const message = req.flash("message");
+    res.render("core/index", { title: "Express", session: req.session, show: show, message: message });
 });
 
 module.exports = router;

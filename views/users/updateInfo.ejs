@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partial/head %>
+    </head>
+    <body>
+        <% include ../partial/header %>
+        <% if(show == "true"){%>
+            <script>var message="<%=message%>"</script>
+            <% include ../partial/temp %> <% } %>
+        <div id="main">
+            <div class="wrapper">
+                <div class="inner">
+                    <h3>유저정보 수정</h3>
+                    <div class="content">
+                        <div class="fields">
+                            <form method="POST" enctype="multipart/form-data">
+                            <div class="col-4"><span class="image fit"><img src="\images\usersph\imagenon.png" id="preview"/></span>
+                            <div class="field">
+                                <label for="inputfile">사진 첨부 </label>
+                                <br />
+                                <input type="file" class="uploadfile" name="img" />
+                            </div>
+                        </div>
+                            <div class="field">
+                            <h3>USERNAME<h3>
+                            <input id="userName" name="userName" type="text" placeholder="<%= data.username %> " />
+                           </div>
+                            <div class="field">
+                            <h3>E-MAiL<h3>
+                            <input id="email" name="email" type="text" readonly value="<%= data.email %> " />
+                        </div>
+                        <ul class="actions special">
+                            <li><button>수정 완료</button></li>
+                            <li><button onclick="javascript:history.back();">수정 취소</button></li>
+                        </ul>
+                    </form>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <% include ../partial/footer %>
+</html>
